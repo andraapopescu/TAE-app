@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO supply a title</title>
+</head>
+<body>
+<!--        <table>
+      <tr th:fragment="view">-->
+<div th:fragment="view">
+    <td>
+        <form th:action="@{/delete/{id}(id=${e.id})}" th:method="delete" th:object="${e}">
+            <input type="submit" value="x" />
+        </form>
+    </td>
+    <td>
+        <form th:action="@{/{id}(id=${e.id})}" th:method="get" >
+            <input type="submit" value="Edit" class="btn btn-default" />
+        </form>
+    </td>
+    <td th:text="${e.id}" />
+    <td th:text="${e.firstName}" />
+    <td th:text="${e.lastName}" />
+    <td th:text="${e.email}" />
+    <td th:text="${e.department.name}" />
+    <td th:text="${e.function.name}" />
+    <td th:text="${e.salary}" />
+</div>
+</body>
+</html>

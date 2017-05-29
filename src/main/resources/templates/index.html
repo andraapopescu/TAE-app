@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <meta charset="UTF-8" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css}" />
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+</head>
+<body>
+<div style="margin:2%!important;" class="container">
+    <h2>Welcome to Employee's HR Portal</h2>
+    <br />
+    <br />
+    <div>
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th />
+                <th />
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Function</th>
+                <th>Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="e : ${employees}">
+                <div th:include="(${session.current} != null and ${e.id} == ${session.current.id})? edit:view::view" />
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <div>
+        <div class="form-style-5">
+            <form th:action="@{/}" method="post" th:object="${employee}">
+                <fieldset>
+                    <legend>Employee Info</legend>
+                    <label id="firstName">First Name</label>
+                    <br />
+                    <input type="text" id="i_fname" th:field="*{firstName}" placeholder="Enter First Name *" />
+                    <br />
+                    <label id="lastName">Last Name</label>
+                    <br />
+                    <input type="text" id="i_lname" th:field="*{lastName}" placeholder="Enter Last Name *" />
+                    <br />
+                    <label id="email">Email</label>
+                    <br />
+                    <input type="text" id="i_email" th:field="*{email}" placeholder="Enter Email *" />
+                    <br />
+                    <label id="department">Department</label>
+                    <br />
+                    <select th:field="*{department}" id="selectd">
+                        <option th:each="d : ${departments}" th:text="${d.name}" th:value="${d.id}" />
+                    </select>
+                    <br />
+                    <label for="function">Function</label>
+                    <br />
+                    <select th:field="*{function}" id="selectf">
+                        <option th:each="f : ${functions}" th:text="${f.name}" th:value="${f.id}" />
+                    </select>
+                    <br />
+                    <label id="salary">Salary</label>
+                    <br />
+                    <input type="number" id="salary" name="salary" value="1200" />
+                    <br />
+                    <br />
+                    <button>Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" />
+<script>$(document).ready(function() {
+    var table = $('#example').DataTable({
+        "searching": false
+    });
+
+//    $('#example tbody').on('click', 'tr', function () {
+//        var data = table.row( this ).data();
+//        console.log(data);
+//    } );
+} );</script>
+</body>
+</html>

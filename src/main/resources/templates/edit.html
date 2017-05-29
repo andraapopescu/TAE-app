@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div th:fragment="view">
+    <div class="form-style-5">
+        <form th:action="@{/{id}/edit(id=${e.id})}" method="post" th:object="${employee}">
+            <fieldset>
+                <legend>Employee Info</legend>
+                <label id="firstName">First Name</label>
+                <br />
+                <input type="text" id="firstName" name="firstName" th:value="${e.firstName}" />
+                <br />
+                <label id="lastName">Last Name</label>
+                <br />
+                <input type="text" id="lastName" name="lastName" th:value="${e.lastName}" />
+                <br />
+                <label id="email">Email</label>
+                <br />
+                <input type="text" id="email" name="email" th:value="${e.email}" />
+                <br />
+                <label id="department">Department</label>
+                <br />
+                <select th:field="*{department}" id="selectd">
+                    <option th:each="d : ${departments}" th:text="${d.name}" th:value="${d.id}" />
+                </select>
+                <br />
+                <label for="function">Function</label>
+                <br />
+                <select th:field="*{function}" id="selectf">
+                    <option th:each="f : ${functions}" th:text="${f.name}" th:value="${f.id}" />
+                </select>
+                <br />
+                <label id="salary">Salary</label>
+                <br />
+                <input type="number" id="salary" name="salary" th:value="${e.salary}" />
+                <br />
+                <br />
+                <button>Update</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
